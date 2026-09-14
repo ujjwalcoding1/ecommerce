@@ -1,0 +1,160 @@
+.pd {
+  padding: 40px 0 80px;
+}
+
+.pd-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  margin-bottom: 60px;
+}
+
+.pd-main-image {
+  aspect-ratio: 1 / 1;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.pd-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pd-thumbs {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.pd-thumbs button {
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--border);
+  background: none;
+  padding: 0;
+  overflow: hidden;
+}
+
+.pd-thumbs button.active {
+  border-color: var(--accent);
+}
+
+.pd-thumbs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pd-category {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  text-transform: capitalize;
+}
+
+.pd-info h1 {
+  font-size: 2rem;
+  margin: 8px 0 10px;
+}
+
+.pd-rating {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.pd-price {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.pd-desc {
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.pd-stock {
+  margin-bottom: 20px;
+}
+
+.pd-add {
+  display: flex;
+  gap: 12px;
+}
+
+.pd-add input {
+  width: 70px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0 12px;
+  color: var(--text);
+}
+
+.pd-status {
+  margin-top: 12px;
+  color: var(--accent);
+  font-size: 0.88rem;
+}
+
+.pd-reviews h2,
+.pd-related h2 {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+.pd-review-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.pd-review-form select {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius);
+  padding: 0 10px;
+}
+
+.pd-review-form input {
+  flex: 1;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  color: var(--text);
+}
+
+.pd-review-item {
+  border-top: 1px solid var(--border);
+  padding: 16px 0;
+}
+
+.pd-review-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.pd-related {
+  margin-top: 60px;
+}
+
+.pd-back {
+  display: inline-block;
+  margin-top: 50px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 860px) {
+  .pd-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}

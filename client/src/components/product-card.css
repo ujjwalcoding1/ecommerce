@@ -1,0 +1,69 @@
+.p-card {
+  display: block;
+  border: 1px solid var(--border);
+  transition: border-color 0.15s ease;
+}
+
+.p-card:hover {
+  border-color: var(--border-strong);
+}
+
+.p-card-image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-raised);
+}
+
+.p-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.p-card-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+}
+
+.p-card-tag-low {
+  color: var(--coral);
+  border-color: var(--coral);
+}
+
+.p-card-tag-out {
+  color: var(--text-muted);
+}
+
+.p-card-body {
+  padding: 14px 16px 18px;
+}
+
+.p-card-body h3 {
+  font-size: 0.98rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.p-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.p-card-price {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.p-card-rating {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
