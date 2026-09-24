@@ -8,7 +8,7 @@ const {
   deleteProduct,
   listCategories,
   addReview,
-} = require('../controllers/productController');
+} = require('../controllers/mongoProductController');
 const protect = require('../middleware/auth');
 const adminOnly = require('../middleware/admin');
 

@@ -1,15 +1,18 @@
 .p-card {
   display: block;
   border: 1px solid var(--border);
-  transition: border-color 0.15s ease;
+  background: var(--bg-raised);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .p-card:hover {
-  border-color: var(--border-strong);
+  border-color: var(--accent);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
 }
 
 .p-card-image {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   position: relative;
   background: var(--bg-raised);
@@ -19,6 +22,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.p-card:hover .p-card-image img {
+  transform: scale(1.05);
 }
 
 .p-card-tag {
@@ -42,11 +50,11 @@
 }
 
 .p-card-body {
-  padding: 14px 16px 18px;
+  padding: 17px 17px 20px;
 }
 
 .p-card-body h3 {
-  font-size: 0.98rem;
+  font-size: 1rem;
   font-weight: 500;
   margin-bottom: 8px;
 }

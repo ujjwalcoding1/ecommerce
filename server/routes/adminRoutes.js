@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getDashboardStats, listUsers, createCategory } = require('../controllers/adminController');
+const { getDashboardStats, listUsers, createCategory } = require('../controllers/mongoAdminController');
 const protect = require('../middleware/auth');
 const adminOnly = require('../middleware/admin');
 

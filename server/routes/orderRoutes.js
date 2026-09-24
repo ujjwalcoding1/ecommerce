@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createOrder, myOrders, getOrder, listAllOrders, updateOrderStatus } = require('../controllers/orderController');
+const { createOrder, myOrders, getOrder, listAllOrders, updateOrderStatus } = require('../controllers/mongoOrderController');
 const protect = require('../middleware/auth');
 const adminOnly = require('../middleware/admin');
 

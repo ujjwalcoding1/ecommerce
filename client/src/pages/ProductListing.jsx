@@ -10,6 +10,7 @@ export default function ProductListing() {
   const [categories, setCategories] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [requestFailed, setRequestFailed] = useState(false);
 
   const search = searchParams.get('search') || '';
   const category = searchParams.get('category') || '';
@@ -22,6 +23,7 @@ export default function ProductListing() {
 
   useEffect(() => {
     setLoading(true);
+    setRequestFailed(false);
     const params = { page, limit: 12 };
     if (search) params.search = search;
     if (category) params.category = category;
@@ -32,6 +34,10 @@ export default function ProductListing() {
       .then((res) => {
         setProducts(res.data.products);
         setTotalPages(res.data.totalPages || 1);
+      })
+      .catch(() => {
+        setProducts([]);
+        setRequestFailed(true);
       })
       .finally(() => setLoading(false));
   }, [search, category, sort, page]);
@@ -46,8 +52,16 @@ export default function ProductListing() {
 
   return (
     <div className="container listing">
+      <div className="listing-intro">
+        <div>
+          <span className="listing-kicker">The Voltage edit</span>
+          <h1>{category || 'All products'}</h1>
+          <p>Everyday tech with a little more character.</p>
+        </div>
+        <div className="listing-count">{loading ? 'Finding your next favorite' : `${products.length} pieces on view`}</div>
+      </div>
       <div className="listing-header">
-        <h1>{category || 'All products'}</h1>
+        <div className="listing-context">{search ? `Results for “${search}”` : 'Curated audio, wearables, and useful extras'}</div>
         <div className="listing-controls">
           <select value={category} onChange={(e) => updateParam('category', e.target.value)}>
             <option value="">All categories</option>
@@ -67,9 +81,13 @@ export default function ProductListing() {
       </div>
 
       {loading ? (
-        <p className="listing-empty">Loading products...</p>
+        <div className="listing-empty listing-empty-loading"><span className="loading-orb" />Loading the collection...</div>
       ) : products.length === 0 ? (
-        <p className="listing-empty">No products match that search yet.</p>
+        <div className="listing-empty">
+          <span className="empty-mark">—</span>
+          <strong>{requestFailed ? 'The collection is taking a breather.' : 'No products match that search.'}</strong>
+          <p>{requestFailed ? 'Connect the store API to bring the latest pieces back into view.' : 'Try another category or clear your search.'}</p>
+        </div>
       ) : (
         <div className="product-grid">
           {products.map((p) => (

@@ -1,13 +1,13 @@
 # Voltage — Full-Stack E-Commerce Store
 
-A complete e-commerce web app: React frontend, Node/Express backend, MySQL database,
+A complete e-commerce web app: React frontend, Node/Express backend, MongoDB database,
 JWT authentication, bcrypt password hashing, and Stripe (test mode) checkout.
 
 ## Stack
 
 - **Frontend:** React 18 + Vite, React Router, Stripe Elements
 - **Backend:** Node.js + Express
-- **Database:** MySQL
+- **Database:** MongoDB with Mongoose
 - **Auth:** JWT + bcrypt
 - **Payments:** Stripe (test mode)
 
@@ -22,18 +22,13 @@ ecommerce/
 ## 1. Prerequisites
 
 - Node.js 18+
-- A MySQL server (local install, or a free hosted MySQL like Railway/Clever Cloud/Aiven)
+- A MongoDB server (local MongoDB or a MongoDB Atlas cluster)
 - A free Stripe account for test-mode API keys: https://dashboard.stripe.com/register
 
 ## 2. Database setup
 
-Create the database and tables:
-
-```bash
-mysql -u root -p < server/schema.sql
-```
-
-This creates a `voltage_store` database with all required tables.
+Create a MongoDB database locally or in MongoDB Atlas. Set `MONGODB_URI` in
+`server/.env`; Mongoose creates the collections when the API first writes data.
 
 ## 3. Backend setup
 
@@ -44,18 +39,23 @@ cp .env.example .env
 ```
 
 Edit `.env`:
-- Set `DB_USER` / `DB_PASSWORD` to your MySQL credentials.
+- Set `MONGODB_URI` to your MongoDB connection string.
 - Set `JWT_SECRET` to any long random string.
 - Set `STRIPE_SECRET_KEY` to your Stripe **test** secret key (starts with `sk_test_...`),
   from https://dashboard.stripe.com/test/apikeys
 
-Seed an admin user, categories, and sample products:
+The API is ready for MongoDB-backed auth, products, cart, orders, payments, and
+admin routes. The legacy SQL schema and seed files are retained but are not used
+by the MongoDB runtime.
+
+Add the demo MongoDB catalog and admin account:
 
 ```bash
-npm run seed
+npm run seed:mongo
 ```
 
-This creates an admin login: **admin@voltage.com / Admin@123**
+This adds eight demo products and creates `admin@voltage.com / Admin@123` when
+that admin account does not already exist.
 
 Start the API:
 
@@ -113,11 +113,11 @@ No real money moves. On the checkout page, use:
   as build-time environment variables).
 - **Backend:** deploy `server/` to Render or Railway (set all `.env` values there;
   update `CLIENT_URL` to your deployed frontend URL for CORS).
-- **Database:** use a hosted MySQL instance (Railway, Aiven, Clever Cloud all have
-  free tiers) and point `DB_HOST`/`DB_USER`/`DB_PASSWORD`/`DB_NAME` at it.
+- **Database:** use MongoDB Atlas or another hosted MongoDB service and set
+  `MONGODB_URI` on the backend.
 
 ## Notes
 
 - Passwords are hashed with bcrypt before storage — never stored in plain text.
-- Stock is decremented inside a MySQL transaction at order time to avoid overselling.
+- Stock is decremented when an order is created after the cart is validated.
 - Admin-only routes are protected both by JWT verification and a role check.

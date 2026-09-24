@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const connectDatabase = require('./config/db');
 
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
@@ -28,4 +29,13 @@ app.use(notFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Voltage API running on port ${PORT}`));
+
+async function startServer() {
+	await connectDatabase();
+	app.listen(PORT, () => console.log(`Voltage API running on port ${PORT}`));
+}
+
+startServer().catch((err) => {
+	console.error('Unable to start API:', err.message);
+	process.exit(1);
+});
